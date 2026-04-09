@@ -1,0 +1,6 @@
+job_id,priority,product_type
+1,High,TypeA
+2,Low,TypeB
+3,Normal,TypeA
+4,High,TypeC
+5,Low,TypeA
