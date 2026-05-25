@@ -49,13 +49,7 @@ streamlit run app.py
 4. "Simülasyonu Başlat" butonuna tıklayıp grafikleri ve darboğaz saptamalarını inceleyin.
 
 ## Ekran Görüntüleri
-Uygulama arayüzünden ve elde edilen analizlerden bazı görseller:
-
-![Uygulama Genel Görünüm - Bekleme Dağılımı](images/screenshot1.png)
-
-![Makine Bazlı Detaylı Çıktı](images/screenshot2.png)
-
-![Karar Destek Sistemi - Isı Haritası](images/screenshot3.png)
+Uygulama arayüzünden ve elde edilen analizlerden bazı görseller images kloseründe.
 
 ## KPI Açıklamaları
 - **Tamamlanan İş**: Tüm simülasyon süresi boyunca üretilen iş.
