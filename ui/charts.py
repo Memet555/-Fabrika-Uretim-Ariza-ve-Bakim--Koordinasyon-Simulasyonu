@@ -24,17 +24,36 @@ def plot_machine_utilization(metrics_df, total_time):
     return fig
 
 def plot_wait_times(jobs_df):
-    """İşlerin kuyrukta bekleme sürelerinin histogram dağılımını gösterir."""
+    """Her aşamadaki bekleme sürelerinin dağılımını Kutu Grafiği (Box Plot) ile gösterir."""
     if jobs_df.empty:
         return go.Figure()
-    fig = px.histogram(
+        
+    # Geniş formattaki DataFrame'i uzun (melted) formata dönüştür
+    # Sütun isimleri app.py'de tanımlanacak olanlarla eşleşmeli
+    melted_df = pd.melt(
         jobs_df, 
-        x='Bekleme Süresi (dk)', 
-        nbins=20, 
-        title='Sipariş/İş Bekleme Süresi Dağılımı',
-        color_discrete_sequence=['#1f77b4'],
-        labels={'Bekleme Süresi (dk)': 'Bekleme Süresi (Dakika)', 'count': 'İş Sayısı'}
+        id_vars=['İş ID'], 
+        value_vars=['Kesim Bekleme (dk)', 'Montaj Bekleme (dk)', 'Paketleme Bekleme (dk)'],
+        var_name='Aşama', 
+        value_name='Bekleme Süresi (dk)'
     )
+    
+    # Kutu Grafiği çiz
+    fig = px.box(
+        melted_df, 
+        x='Aşama', 
+        y='Bekleme Süresi (dk)', 
+        color='Aşama',
+        title='İstasyon Bazlı Kuyrukta Bekleme Süresi Dağılımı',
+        color_discrete_map={
+            'Kesim Bekleme (dk)': '#1f77b4',
+            'Montaj Bekleme (dk)': '#ff7f0e',
+            'Paketleme Bekleme (dk)': '#2ca02c'
+        },
+        labels={'Bekleme Süresi (dk)': 'Bekleme Süresi (Dakika)', 'Aşama': 'Üretim İstasyonu'}
+    )
+    
+    fig.update_layout(showlegend=False)
     return fig
 
 def plot_hourly_heatmap(jobs_df):
